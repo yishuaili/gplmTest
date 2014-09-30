@@ -1,0 +1,39 @@
+<apex:page controller="MyProfileUpdateController" id="pageId">
+  	<apex:form id="formId">
+      <apex:pageBlock title="My Details" id="pbId">
+      <apex:pageMessages id="msgs"/>
+      <!-- to dispaly buttons -->
+      <apex:pageBlockButtons id="pButtonId">
+          <apex:commandButton value="Edit" rendered="{!isEdit}" action="{!isEditEnable}" rerender="pbId"/>
+          <apex:commandButton value="Save" rendered="{!!isEdit}" action="{!updateContactDetails}" rerender="pbId"/>
+          <apex:commandbutton value="Cancel"/>
+      </apex:pageBlockButtons>
+      <apex:outputPanel id="panelId">
+      <!-- To display personal details -->
+          <apex:pageBlockSection title="Personal Details" id="pbs1Id" rendered="{!isEdit}">
+              <apex:repeat value="{!fields}" var="f">
+                  <apex:outputField value="{!objContact[f.fieldPath]}"/>
+              </apex:repeat>
+          </apex:pageBlockSection>
+          <!-- To display Address details -->
+          <apex:pageBlockSection title="Address Details" id="pbs2Id" rendered="{!isEdit}">
+              <apex:repeat value="{!AddressFields}" var="f">
+                  <apex:outputField value="{!objContact[f.fieldPath]}"/>
+              </apex:repeat>
+          </apex:pageBlockSection>
+          <!-- below section is used to update the licensee details -->
+          <apex:pageBlockSection title="Personal Details" id="pbs3Id" rendered="{!!isEdit}">
+              <apex:repeat value="{!fields}" var="f">
+                  <apex:inputField value="{!objContact[f.fieldPath]}"/>
+              </apex:repeat>
+          </apex:pageBlockSection>
+          <!-- To update Address details -->
+          <apex:pageBlockSection title="Address Details" id="pbs4Id" rendered="{!!isEdit}">
+              <apex:repeat value="{!AddressFields}" var="f">
+                  <apex:inputField value="{!objContact[f.fieldPath]}"/>
+              </apex:repeat>
+          </apex:pageBlockSection>
+        </apex:outputPanel>  
+        </apex:pageBlock>
+    </apex:form>
+</apex:page>
